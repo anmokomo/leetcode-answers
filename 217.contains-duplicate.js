@@ -41,13 +41,8 @@
 var containsDuplicate = function(nums) {
     
     //76 ms
+var containsDuplicate = function(nums) {
     const newSet = new Set([...nums])
-    console.log('newSet', newSet)
-    console.log('nums.length', nums.length)
-    console.log('newSet.length', newSet.size)
-    if(newSet.size !== nums.length) {
-        return true
-    } else {
-    return false
-    }
+    return newSet.size !== nums.length
+};
 };
