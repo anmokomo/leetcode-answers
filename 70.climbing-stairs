@@ -1,0 +1,62 @@
+[70] Climbing Stairs  
+
+https://leetcode.com/problems/climbing-stairs/description/
+
+* algorithms
+* Easy (50.52%)
+* Total Accepted:    1.4M
+* Total Submissions: 2.7M
+* Testcase Example:  '2'
+
+You are climbing a staircase. It takes n steps to reach the top.
+
+Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+
+ 
+Example 1:
+
+
+Input: n = 2
+Output: 2
+Explanation: There are two ways to climb to the top.
+1. 1 step + 1 step
+2. 2 steps
+
+
+Example 2:
+
+
+Input: n = 3
+Output: 3
+Explanation: There are three ways to climb to the top.
+1. 1 step + 1 step + 1 step
+2. 1 step + 2 steps
+3. 2 steps + 1 step
+
+
+ 
+Constraints:
+
+
+	1 <= n <= 45
+
+/*think in terms of sub-problems - if n = 4 and we're at val 1, we have a sub-problem - we can either choose to go one step or two steps from there 
+Draw a tree starting at step 0 to get a better view of the problem - notice you can 
+JUST USE THE PATH ON THE FAR LEFT, because all other paths of the tree are repeat sub-problems
+Bottom up approach: if n=5, 4 and 5 will always be 1 
+from 3, there are 2 sub-problems- can step once or twice; twice brings you to 5 (end), once brings you to 4...and we already calculated we have 1 possible step from 4, so we don't need to compute that again  
+from 2, there are 2 sub problems- can step 1 or 2; 1 leads us to 3, and we already calculated how many possible from position 3; if we step twice, we already calculated possible steps from 4*/
+function climbStairs(n: number): number {
+    //set init to 1, 1 - going top down, @ n and n-1, will always have 1 possibility
+    let memo = [1, 1]
+    let total = 0
+    if (n === 1) return 1;
+    //starting at index 2, because we already know @ 0,1, there is 1 possiblity
+    for (let i = 2; i <= n; i++) {
+        //at other positions, possibilities = the prev two combined
+        total = memo[0] + memo[1]
+        memo[0] = memo[1]
+        memo[1] = total
+    }
+    return total
+};
