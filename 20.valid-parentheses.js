@@ -67,7 +67,7 @@ var isValid = function(s) {
                 leftStack.pop()
                 if (leftStack.length === 0 && isLastElem) {
                     return true
-                } else if (leftStack.length > 0 && i === arr.length-1) {
+                } else if (leftStack.length > 0 && isLastElem) {
                     return false
                 }
             } else {
